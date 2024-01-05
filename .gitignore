@@ -1,0 +1,4 @@
+.clang-format
+.clangd
+HW1.cpp
+ProcessorMulti_Processor_Core_PrivFunc.cpp

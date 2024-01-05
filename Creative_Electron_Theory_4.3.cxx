@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 
-
 std::ostream &qDebug();
 int qRound(double);
 
@@ -609,7 +608,7 @@ void judge_circle(const short *lidar_data, imu_data_type imu_data)
 
     for (std::size_t i = head_laser - 15; i < head_laser + 15; i++)
     {
-        if (i < 360 && i >= 0)
+        if (i < 360)
         {
             if (barrier_start == 0 && (lidar_data[i] == 0 || lidar_data[i] > 500) &&
                 lidar_data[i + 1] < 200)
@@ -623,7 +622,7 @@ void judge_circle(const short *lidar_data, imu_data_type imu_data)
     int barrier_width_sqr = std::pow(lidar_data[barrier_start], 2) +
                             std::pow(lidar_data[barrier_end], 2) -
                             2 * lidar_data[barrier_start] * lidar_data[barrier_end] *
-                                std::cos(barrier_end - barrier_start);
+                                fast_cos(barrier_end - barrier_start);
     if (barrier_start != 0 && barrier_end != 0 && barrier_width_sqr > 196)
     {
         circle_flag = true;
