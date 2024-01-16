@@ -621,8 +621,9 @@ void judge_circle(const short *lidar_data, imu_data_type imu_data)
 
     int barrier_width_sqr = std::pow(lidar_data[barrier_start], 2) +
                             std::pow(lidar_data[barrier_end], 2) -
-                            2 * lidar_data[barrier_start] * lidar_data[barrier_end] *
-                                fast_cos(barrier_end - barrier_start);
+                            ((2 * lidar_data[barrier_start] * lidar_data[barrier_end] *
+                              fast_cos(barrier_end - barrier_start)) >>
+                             8);
     if (barrier_start != 0 && barrier_end != 0 && barrier_width_sqr > 196)
     {
         circle_flag = true;
